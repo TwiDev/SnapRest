@@ -25,6 +25,11 @@
             <artifactId>snaprest-http</artifactId>
             <version>${global.version}</version>
         </dependency>
+        <dependency>
+            <groupId>ch.twidev.snaprest</groupId>
+            <artifactId>snaprest-common</artifactId>
+            <version>${global.version}</version>
+        </dependency>
     </dependencies>
 
 </project>

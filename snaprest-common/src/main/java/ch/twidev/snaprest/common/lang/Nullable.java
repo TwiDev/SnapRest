@@ -1,4 +1,4 @@
-package ch.twidev.snaprest.api.lang;
+package ch.twidev.snaprest.common.lang;
 
 import java.lang.annotation.*;
 

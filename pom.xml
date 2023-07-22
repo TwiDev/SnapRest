@@ -8,10 +8,10 @@
     <artifactId>snaprest-parent</artifactId>
     <name>SnapRest Parent</name>
     <modules>
-        <module>common</module>
-        <module>core</module>
-        <module>network</module>
-        <module>http</module>
+        <module>snaprest-common</module>
+        <module>snaprest-core</module>
+        <module>snaprest-network</module>
+        <module>snaprest-http</module>
     </modules>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
@@ -33,6 +33,11 @@
             <dependency>
                 <groupId>ch.twidev.snaprest</groupId>
                 <artifactId>snaprest-network</artifactId>
+                <version>${global.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>ch.twidev.snaprest</groupId>
+                <artifactId>snaprest-common</artifactId>
                 <version>${global.version}</version>
             </dependency>
         </dependencies>

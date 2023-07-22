@@ -1,4 +1,4 @@
-package ch.twidev.snaprest.api.util;
+package ch.twidev.snaprest.common.util;
 
 import ch.twidev.snaprest.api.lang.Nullable;
 
