@@ -9,7 +9,7 @@
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 
-    <groupId>ch.twidev.snapresst</groupId>
+    <groupId>ch.twidev.snaprest</groupId>
     <artifactId>snaprest-network</artifactId>
     <version>${global.version}</version>
 
