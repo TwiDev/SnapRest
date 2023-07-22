@@ -1,7 +1,7 @@
 package ch.twidev.snaprest.api.bind;
 
-import ch.twidev.snaprest.api.lang.Nullable;
-import ch.twidev.snaprest.api.util.Assert;
+import ch.twidev.snaprest.common.lang.Nullable;
+import ch.twidev.snaprest.common.util.Assert;
 
 public enum RequestType {
 

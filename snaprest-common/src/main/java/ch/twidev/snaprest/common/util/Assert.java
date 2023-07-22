@@ -1,6 +1,6 @@
 package ch.twidev.snaprest.common.util;
 
-import ch.twidev.snaprest.api.lang.Nullable;
+import ch.twidev.snaprest.common.lang.Nullable;
 
 public abstract class Assert {
 
