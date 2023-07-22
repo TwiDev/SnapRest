@@ -1,4 +1,4 @@
-package ch.twidev.snaprest.api.bind;
+package ch.twidev.snaprest.network.bind;
 
 import ch.twidev.snaprest.common.lang.Nullable;
 import ch.twidev.snaprest.common.util.Assert;

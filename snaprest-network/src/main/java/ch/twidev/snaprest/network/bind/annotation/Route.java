@@ -1,6 +1,6 @@
-package ch.twidev.snaprest.api.bind.annotation;
+package ch.twidev.snaprest.network.bind.annotation;
 
-import ch.twidev.snaprest.api.bind.RequestType;
+import ch.twidev.snaprest.network.bind.RequestType;
 import ch.twidev.snaprest.http.ResponseType;
 
 import java.lang.annotation.ElementType;
