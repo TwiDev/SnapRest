@@ -10,7 +10,8 @@
     <modules>
         <module>common</module>
         <module>core</module>
-        <module>api</module>
+        <module>network</module>
+        <module>http</module>
     </modules>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
@@ -21,5 +22,20 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <global.version>1.0.0</global.version>
     </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>ch.twidev.snaprest</groupId>
+                <artifactId>snaprest-http</artifactId>
+                <version>${global.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>ch.twidev.snaprest</groupId>
+                <artifactId>snaprest-network</artifactId>
+                <version>${global.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
 </project>
