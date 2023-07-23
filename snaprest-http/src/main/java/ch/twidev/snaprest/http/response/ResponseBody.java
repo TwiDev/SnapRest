@@ -4,10 +4,8 @@ import ch.twidev.snaprest.common.lang.Nullable;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
 public class ResponseBody {
@@ -15,11 +13,31 @@ public class ResponseBody {
     private final InputStream inputStream;
     private final String responseMessage;
     private final int responseCode;
+    private ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 
     public ResponseBody(InputStream inputStream, String responseMessage, int responseCode) {
         this.inputStream = inputStream;
         this.responseMessage = responseMessage;
         this.responseCode = responseCode;
+
+        int chunk = 0;
+        byte[] data = new byte[256];
+
+        while(true)
+        {
+            try {
+                if (-1 == (chunk = inputStream.read(data))) break;
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            byteArrayOutputStream.write(data, 0, chunk);
+        }
+
+        try {
+            inputStream.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public String getResponseMessage() {
@@ -37,7 +55,7 @@ public class ResponseBody {
     public @Nullable String parseString() {
         try {
             BufferedReader in = new BufferedReader(
-                    new InputStreamReader(this.inputStream));
+                    new InputStreamReader(new ByteArrayInputStream(byteArrayOutputStream.toByteArray())));
             String inputLine;
             StringBuilder content = new StringBuilder();
             while ((inputLine = in.readLine()) != null) {
@@ -55,11 +73,12 @@ public class ResponseBody {
 
     public @Nullable JSONObject parseJson() {
         try {
-            BufferedReader streamReader = new BufferedReader(new InputStreamReader(this.inputStream, StandardCharsets.UTF_8));
+            BufferedReader in = new BufferedReader(
+                    new InputStreamReader(new ByteArrayInputStream(byteArrayOutputStream.toByteArray()), StandardCharsets.UTF_8));
             StringBuilder responseStrBuilder = new StringBuilder();
 
             String inputStr;
-            while ((inputStr = streamReader.readLine()) != null)
+            while ((inputStr = in.readLine()) != null)
                 responseStrBuilder.append(inputStr);
 
             return new JSONObject(responseStrBuilder.toString());

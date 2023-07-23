@@ -18,12 +18,13 @@ public class CoreTest {
         Request request = SnapRestCore.getInstance().getRequestFactory().createRequest(url, RequestType.GET, new RequestCallback() {
             @Override
             public void onSucceed(ResponseBody responseBody) {
-                System.out.println(responseBody.parseString());
+                System.out.println("Succeed");
+                System.out.println("Response: " + responseBody.parseString());
             }
 
             @Override
-            public void onFailure(RequestFailureReason requestFailureType1) {
-
+            public void onFailure(RequestFailureReason requestFailureType) {
+                System.out.println("Fail " + requestFailureType.toString());
             }
         }).send();
 

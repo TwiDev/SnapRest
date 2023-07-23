@@ -61,6 +61,8 @@ public class Request {
 
         try {
             ResponseBody responseBody = connectionFactory.createConnection(url.getNetUrl(), requestType.toString(), conModifier);
+
+            this.succeedRequest(responseBody);
         } catch (IOException e) {
             e.printStackTrace();
             this.failRequest(RequestFailureReason.CANNOT_CREATE_CONNECTION_TO_URL);
