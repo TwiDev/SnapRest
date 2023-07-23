@@ -6,17 +6,28 @@ import ch.twidev.snaprest.network.util.URL;
 
 public class RequestFactory {
 
-    Request createRequest(URL url) {
+    public Request createRequest(URL url) {
         return createRequest(url, RequestType.GET, Header.empty());
     }
 
-    Request createRequest(URL url, RequestType requestType) {
+    public Request createRequest(URL url, RequestType requestType) {
         return createRequest(url, requestType, Header.empty());
     }
 
-    Request createRequest(URL url, RequestType requestType, Header requestHeader) {
+    public Request createRequest(URL url, RequestType requestType, Header requestHeader) {
         return new Request(url, requestType, requestHeader);
+    }
 
+    public Request createRequest(URL url, RequestCallback callback) {
+        return createRequest(url, RequestType.GET, Header.empty(), callback);
+    }
+
+    public Request createRequest(URL url, RequestType requestType, RequestCallback callback) {
+        return createRequest(url, requestType, Header.empty(), callback);
+    }
+
+    public Request createRequest(URL url, RequestType requestType, Header requestHeader, RequestCallback callback) {
+        return new Request(url, requestType, requestHeader, callback);
     }
 
 }

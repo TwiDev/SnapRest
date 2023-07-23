@@ -19,6 +19,10 @@ public class Header {
         return headerProperties.get(key);
     }
 
+    public HashMap<String, Object> getHeaderProperties() {
+        return headerProperties;
+    }
+
     public static Header empty() {
         return new Header();
     }

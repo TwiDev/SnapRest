@@ -19,4 +19,28 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <dependencies>
+        <dependency>
+            <groupId>ch.twidev.snaprest</groupId>
+            <artifactId>snaprest-http</artifactId>
+            <version>${global.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.twidev.snaprest</groupId>
+            <artifactId>snaprest-network</artifactId>
+            <version>${global.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.twidev.snaprest</groupId>
+            <artifactId>snaprest-common</artifactId>
+            <version>${global.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>RELEASE</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
 </project>
