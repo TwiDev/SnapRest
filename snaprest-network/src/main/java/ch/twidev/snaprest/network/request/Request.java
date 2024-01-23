@@ -49,7 +49,7 @@ public class Request {
         if(async) {
             connectionFactory.createAsyncConnection(url.getNetUrl(), requestType.toString(), conModifier, responseBody -> {
                 if(responseBody == null) {
-                    this.failRequest(RequestFailureReason.CANNOT_CREATE_CONNECTION_TO_URL);
+                    this.failRequest(RequestFailureReason.CANNOT_CREATE_CONNECTION_TO_URL, new NullPointerException());
                     return;
                 }
 
@@ -64,16 +64,15 @@ public class Request {
 
             this.succeedRequest(responseBody);
         } catch (IOException e) {
-            e.printStackTrace();
-            this.failRequest(RequestFailureReason.CANNOT_CREATE_CONNECTION_TO_URL);
+            this.failRequest(RequestFailureReason.CANNOT_CREATE_CONNECTION_TO_URL, e);
         }
 
         return this;
     }
 
-    private void failRequest(RequestFailureReason requestFailureReason) {
+    private void failRequest(RequestFailureReason requestFailureReason, Throwable throwable) {
         if(callback != null)
-            callback.onFailure(RequestFailureReason.CANNOT_CREATE_CONNECTION_TO_URL);
+            callback.onFailure(RequestFailureReason.CANNOT_CREATE_CONNECTION_TO_URL, throwable);
     }
 
     private void succeedRequest(ResponseBody responseBody) {

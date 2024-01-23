@@ -12,6 +12,7 @@ public class ResponseBody {
 
     private final InputStream inputStream;
     private final String responseMessage;
+    private final String rawOutput;
     private final int responseCode;
     private ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 
@@ -35,9 +36,22 @@ public class ResponseBody {
 
         try {
             inputStream.close();
+
+            BufferedReader in = new BufferedReader(
+                    new InputStreamReader(new ByteArrayInputStream(byteArrayOutputStream.toByteArray()), StandardCharsets.UTF_8));
+            StringBuilder responseStrBuilder = new StringBuilder();
+
+            String inputStr;
+            while ((inputStr = in.readLine()) != null)
+                responseStrBuilder.append(inputStr);
+
+            in.close();
+
+            this.rawOutput = responseStrBuilder.toString();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
     }
 
     public String getResponseMessage() {
@@ -53,39 +67,25 @@ public class ResponseBody {
     }
 
     public @Nullable String parseString() {
-        try {
-            BufferedReader in = new BufferedReader(
-                    new InputStreamReader(new ByteArrayInputStream(byteArrayOutputStream.toByteArray())));
-            String inputLine;
-            StringBuilder content = new StringBuilder();
-            while ((inputLine = in.readLine()) != null) {
-                content.append(inputLine);
-            }
-            in.close();
+        return rawOutput;
+    }
 
-            return content.toString();
-        } catch (IOException exception) {
-            exception.printStackTrace();
+    public @Nullable JSONObject parseJson() {
+        try {
+            return new JSONObject(rawOutput);
+        } catch (JSONException e) {
+            e.printStackTrace();
 
             return null;
         }
     }
 
-    public @Nullable JSONObject parseJson() {
-        try {
-            BufferedReader in = new BufferedReader(
-                    new InputStreamReader(new ByteArrayInputStream(byteArrayOutputStream.toByteArray()), StandardCharsets.UTF_8));
-            StringBuilder responseStrBuilder = new StringBuilder();
-
-            String inputStr;
-            while ((inputStr = in.readLine()) != null)
-                responseStrBuilder.append(inputStr);
-
-            return new JSONObject(responseStrBuilder.toString());
-        } catch (IOException | JSONException e) {
-            e.printStackTrace();
-
-            return null;
-        }
+    @Override
+    public String toString() {
+        return "ResponseBody{" +
+                "responseMessage='" + responseMessage + '\'' +
+                ", responseCode=" + responseCode + '\'' +
+                ", rawOutput='" + rawOutput +
+                '}';
     }
 }

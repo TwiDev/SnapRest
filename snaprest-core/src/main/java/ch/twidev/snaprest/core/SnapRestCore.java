@@ -5,7 +5,7 @@ import ch.twidev.snaprest.network.request.RequestFactory;
 
 import java.util.logging.Logger;
 
-public class SnapRestCore {
+public class SnapRestCore implements SnapRest{
 
     private static SnapRestCore instance;
 
@@ -17,6 +17,8 @@ public class SnapRestCore {
 
     public SnapRestCore() {
         super();
+
+        instance = this;
 
         this.connectionFactory = new ConnectionFactory();
         this.requestFactory = new RequestFactory();
@@ -31,14 +33,10 @@ public class SnapRestCore {
     }
 
     public static SnapRestCore getInstance() {
+        if(instance == null) {
+            instance = new SnapRestCore();
+        }
+
         return instance;
-    }
-
-    public static void main(String[] args) {
-        init();
-    }
-
-    public static void init() {
-        instance = new SnapRestCore();
     }
 }

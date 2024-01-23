@@ -7,6 +7,6 @@ public interface RequestCallback {
 
     public void onSucceed(@NotNull ResponseBody responseBody);
 
-    public void onFailure(RequestFailureReason requestFailureType1);
+    public void onFailure(RequestFailureReason requestFailureType, Throwable throwable);
 
 }
